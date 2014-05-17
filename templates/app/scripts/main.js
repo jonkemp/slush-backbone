@@ -1,7 +1,7 @@
-/* global <%= camelizeAppName %>, $ */
+/* global <%= classifyAppName %>, $ */
 
 
-window.<%= camelizeAppName %> = {
+window.<%= classifyAppName %> = {
     Models: {},
     Collections: {},
     Views: {},
@@ -12,5 +12,5 @@ window.<%= camelizeAppName %> = {
 };
 
 $(document).ready(function () {
-    <%= camelizeAppName %>.init();
+    <%= classifyAppName %>.init();
 });

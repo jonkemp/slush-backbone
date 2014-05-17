@@ -72,7 +72,7 @@ gulp.task('default', function (done) {
 
         answers.appname = appname.replace(/[^\w\s]+?/g, ' ');
         answers.appNameSlug = _s.slugify(answers.appname);
-        answers.camelizeAppName = _s.camelize(answers.appname);
+        answers.classifyAppName = _s.classify(answers.appname);
 
         answers.includeSass = hasFeature('includeSass');
         answers.includeBootstrap = hasFeature('includeBootstrap');
