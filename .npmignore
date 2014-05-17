@@ -1,0 +1,9 @@
+.editorconfig
+.travis.yml
+.jshintrc
+.gitattributes
+contributing.md
+test
+
+# don't ignore .npmignore files
+!.npmignore
