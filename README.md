@@ -34,6 +34,16 @@ Run the generator from within the new folder:
 $ cd my-slush-backbone && slush backbone
 ```
 
+## Generator tasks
+
+Available tasks in generator:
+
+- backbone:model
+- backbone:view
+- backbone:collection
+- backbone:router
+- backbone:all
+
 ## Options
 
 - `--skip-install`
