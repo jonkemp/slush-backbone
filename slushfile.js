@@ -20,6 +20,24 @@ var gulp = require('gulp'),
     path = require('path'),
     wiredep = require('wiredep');
 
+function getAppName() {
+    var appname;
+
+    try {
+        appname = require(path.join(process.cwd(), 'bower.json')).name;
+    } catch (e) {
+        try {
+            appname = require(path.join(process.cwd(), 'package.json')).name;
+        } catch (e) {}
+    }
+
+    if (!appname) {
+        appname = path.basename(process.cwd());
+    }
+
+    return appname.replace(/[^\w\s]+?/g, ' ');
+}
+
 gulp.task('default', function (done) {
     gutil.log('Out of the box you get HTML5 Boilerplate, jQuery and Backbone.js to build your app.');
 
@@ -48,8 +66,7 @@ gulp.task('default', function (done) {
         }
     ],
     function (answers) {
-        var appname,
-            features = answers.features,
+        var features = answers.features,
             hasFeature = function (feat) {
                 return features.indexOf(feat) !== -1;
             };
@@ -58,19 +75,7 @@ gulp.task('default', function (done) {
             return done();
         }
 
-        try {
-            appname = require(path.join(process.cwd(), 'bower.json')).name;
-        } catch (e) {
-            try {
-                appname = require(path.join(process.cwd(), 'package.json')).name;
-            } catch (e) {}
-        }
-
-        if (!appname) {
-            appname = path.basename(process.cwd());
-        }
-
-        answers.appname = appname.replace(/[^\w\s]+?/g, ' ');
+        answers.appname = getAppName();
         answers.appNameSlug = _s.slugify(answers.appname);
         answers.classifyAppName = _s.classify(answers.appname);
 
@@ -122,3 +127,85 @@ gulp.task('default', function (done) {
         });
     });
 });
+
+gulp.task('model', function (done) {
+    var appData = {};
+    var modelName = gulp.args[0];
+
+    appData.appname = getAppName();
+    appData.appNameSlug = _s.slugify(appData.appname);
+    appData.classifyAppName = _s.classify(appData.appname);
+    appData.classifyModelName = _s.classify(modelName);
+
+    gulp.src(__dirname + '/models/index.js')
+        .pipe(template(appData))
+        .pipe(rename('/models/' + modelName + '.js'))
+        .pipe(conflict('./'))
+        .pipe(gulp.dest('./app/scripts'));
+
+    process.on('exit', function () {
+        done();
+    });
+});
+
+gulp.task('view', function (done) {
+    var appData = {};
+    var viewName = gulp.args[0];
+
+    appData.appname = getAppName();
+    appData.appNameSlug = _s.slugify(appData.appname);
+    appData.classifyAppName = _s.classify(appData.appname);
+    appData.classifyViewName = _s.classify(viewName);
+
+    gulp.src(__dirname + '/views/index.js')
+        .pipe(template(appData))
+        .pipe(rename('/views/' + viewName + '.js'))
+        .pipe(conflict('./'))
+        .pipe(gulp.dest('./app/scripts'));
+
+    process.on('exit', function () {
+        done();
+    });
+});
+
+gulp.task('collection', function (done) {
+    var appData = {};
+    var collectionName = gulp.args[0];
+
+    appData.appname = getAppName();
+    appData.appNameSlug = _s.slugify(appData.appname);
+    appData.classifyAppName = _s.classify(appData.appname);
+    appData.classifyCollectionName = _s.classify(collectionName);
+
+    gulp.src(__dirname + '/collections/index.js')
+        .pipe(template(appData))
+        .pipe(rename('/collections/' + collectionName + '.js'))
+        .pipe(conflict('./'))
+        .pipe(gulp.dest('./app/scripts'));
+
+    process.on('exit', function () {
+        done();
+    });
+});
+
+gulp.task('router', function (done) {
+    var appData = {};
+    var routerName = gulp.args[0];
+
+    appData.appname = getAppName();
+    appData.appNameSlug = _s.slugify(appData.appname);
+    appData.classifyAppName = _s.classify(appData.appname);
+    appData.classifyRouterName = _s.classify(routerName);
+
+    gulp.src(__dirname + '/routes/index.js')
+        .pipe(template(appData))
+        .pipe(rename('/routes/' + routerName + '.js'))
+        .pipe(conflict('./'))
+        .pipe(gulp.dest('./app/scripts'));
+
+    process.on('exit', function () {
+        done();
+    });
+});
+
+gulp.task('all', ['model', 'collection', 'router', 'view']);
