@@ -130,7 +130,7 @@ gulp.task('default', function (done) {
 
 gulp.task('model', function (done) {
     var appData = {};
-    var modelName = gulp.args[0];
+    var modelName = gulp.args[0] || 'application';
 
     appData.appname = getAppName();
     appData.appNameSlug = _s.slugify(appData.appname);
@@ -150,7 +150,7 @@ gulp.task('model', function (done) {
 
 gulp.task('view', function (done) {
     var appData = {};
-    var viewName = gulp.args[0];
+    var viewName = gulp.args[0] || 'application';
 
     appData.appname = getAppName();
     appData.appNameSlug = _s.slugify(appData.appname);
@@ -170,7 +170,7 @@ gulp.task('view', function (done) {
 
 gulp.task('collection', function (done) {
     var appData = {};
-    var collectionName = gulp.args[0];
+    var collectionName = gulp.args[0] || 'application';
 
     appData.appname = getAppName();
     appData.appNameSlug = _s.slugify(appData.appname);
@@ -190,7 +190,7 @@ gulp.task('collection', function (done) {
 
 gulp.task('router', function (done) {
     var appData = {};
-    var routerName = gulp.args[0];
+    var routerName = gulp.args[0] || 'application';
 
     appData.appname = getAppName();
     appData.appNameSlug = _s.slugify(appData.appname);
