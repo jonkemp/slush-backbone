@@ -1,4 +1,4 @@
-# [slush](https://github.com/klei/slush)-backbone [![Build Status](https://secure.travis-ci.org/jonkemp/slush-backbone.png?branch=master)](https://travis-ci.org/jonkemp/slush-backbone)
+# [slush](https://github.com/slushjs/slush)-backbone [![Build Status](https://secure.travis-ci.org/jonkemp/slush-backbone.png?branch=master)](https://travis-ci.org/jonkemp/slush-backbone)
 
 > WIP - Slush generator for Backbone.js web apps
 
@@ -51,7 +51,7 @@ Available tasks in generator:
   
 ## Getting To Know Slush
 
-Slush is a tool that uses Gulp for project scaffolding. To find out more about Slush, check out the [documentation](https://github.com/klei/slush).
+Slush is a tool that uses Gulp for project scaffolding. To find out more about Slush, check out the [documentation](https://github.com/slushjs/slush).
 
 ## Contributing
 
