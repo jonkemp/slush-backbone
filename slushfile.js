@@ -18,7 +18,8 @@ var gulp = require('gulp'),
     inquirer = require('inquirer'),
     fs = require('fs'),
     path = require('path'),
-    wiredep = require('wiredep');
+    wiredep = require('wiredep'),
+    addScript = require(__dirname + '/add-script');
 
 function getAppName() {
     var appname;
@@ -143,6 +144,10 @@ gulp.task('model', function (done) {
         .pipe(conflict('./'))
         .pipe(gulp.dest('./app/scripts'));
 
+    gulp.src('./app/index.html')
+        .pipe(addScript('scripts/models/' + modelName + '.js'))
+        .pipe(gulp.dest('./app'));
+
     process.on('exit', function () {
         done();
     });
@@ -162,6 +167,10 @@ gulp.task('view', function (done) {
         .pipe(rename('/views/' + viewName + '.js'))
         .pipe(conflict('./'))
         .pipe(gulp.dest('./app/scripts'));
+
+    gulp.src('./app/index.html')
+        .pipe(addScript('scripts/views/' + viewName + '.js'))
+        .pipe(gulp.dest('./app'));
 
     process.on('exit', function () {
         done();
@@ -183,6 +192,10 @@ gulp.task('collection', function (done) {
         .pipe(conflict('./'))
         .pipe(gulp.dest('./app/scripts'));
 
+    gulp.src('./app/index.html')
+        .pipe(addScript('scripts/collections/' + collectionName + '.js'))
+        .pipe(gulp.dest('./app'));
+
     process.on('exit', function () {
         done();
     });
@@ -202,6 +215,10 @@ gulp.task('router', function (done) {
         .pipe(rename('/routes/' + routerName + '.js'))
         .pipe(conflict('./'))
         .pipe(gulp.dest('./app/scripts'));
+
+    gulp.src('./app/index.html')
+        .pipe(addScript('scripts/routes/' + routerName + '.js'))
+        .pipe(gulp.dest('./app'));
 
     process.on('exit', function () {
         done();
