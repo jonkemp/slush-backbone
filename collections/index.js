@@ -5,9 +5,9 @@
 (function () {
     'use strict';
 
-    <%= classifyAppName %>.Collections.<%= classifyCollectionName %> = Backbone.Collection.extend({
+    <%= classifyAppName %>.Collections.<%= classifyClassName %> = Backbone.Collection.extend({
 
-        model: <%= classifyAppName %>.Models.<%= classifyCollectionName %>
+        model: <%= classifyAppName %>.Models.<%= classifyClassName %>
 
     });
 

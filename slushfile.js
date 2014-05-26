@@ -136,7 +136,7 @@ gulp.task('model', function (done) {
     appData.appname = getAppName();
     appData.appNameSlug = _s.slugify(appData.appname);
     appData.classifyAppName = _s.classify(appData.appname);
-    appData.classifyModelName = _s.classify(modelName);
+    appData.classifyClassName = _s.classify(modelName);
 
     gulp.src(__dirname + '/models/index.js')
         .pipe(template(appData))
@@ -160,7 +160,7 @@ gulp.task('view', function (done) {
     appData.appname = getAppName();
     appData.appNameSlug = _s.slugify(appData.appname);
     appData.classifyAppName = _s.classify(appData.appname);
-    appData.classifyViewName = _s.classify(viewName);
+    appData.classifyClassName = _s.classify(viewName);
 
     gulp.src(__dirname + '/views/index.js')
         .pipe(template(appData))
@@ -184,7 +184,7 @@ gulp.task('collection', function (done) {
     appData.appname = getAppName();
     appData.appNameSlug = _s.slugify(appData.appname);
     appData.classifyAppName = _s.classify(appData.appname);
-    appData.classifyCollectionName = _s.classify(collectionName);
+    appData.classifyClassName = _s.classify(collectionName);
 
     gulp.src(__dirname + '/collections/index.js')
         .pipe(template(appData))
@@ -208,7 +208,7 @@ gulp.task('router', function (done) {
     appData.appname = getAppName();
     appData.appNameSlug = _s.slugify(appData.appname);
     appData.classifyAppName = _s.classify(appData.appname);
-    appData.classifyRouterName = _s.classify(routerName);
+    appData.classifyClassName = _s.classify(routerName);
 
     gulp.src(__dirname + '/routes/index.js')
         .pipe(template(appData))
@@ -225,4 +225,43 @@ gulp.task('router', function (done) {
     });
 });
 
-gulp.task('all', ['model', 'collection', 'router', 'view']);
+gulp.task('all', function (done) {
+    var appData = {};
+    var className = 'application';
+
+    appData.appname = getAppName();
+    appData.appNameSlug = _s.slugify(appData.appname);
+    appData.classifyAppName = _s.classify(appData.appname);
+    appData.classifyClassName = _s.classify(className);
+
+    var stream1 = gulp.src(__dirname + '/models/index.js')
+        .pipe(rename('/models/' + className + '.js'));
+
+    var stream2 = gulp.src(__dirname + '/views/index.js')
+        .pipe(rename('/views/' + className + '.js'));
+
+    var stream3 = gulp.src(__dirname + '/collections/index.js')
+        .pipe(rename('/collections/' + className + '.js'));
+
+    var stream4 = gulp.src(__dirname + '/routes/index.js')
+        .pipe(rename('/routes/' + className + '.js'));
+
+    var streams = [stream1, stream2, stream3, stream4];
+
+    streams.forEach(function (stream) {
+        stream.pipe(template(appData))
+            .pipe(conflict('./'))
+            .pipe(gulp.dest('./app/scripts'));
+    });
+
+    gulp.src('./app/index.html')
+        .pipe(addScript('scripts/models/' + className + '.js'))
+        .pipe(addScript('scripts/views/' + className + '.js'))
+        .pipe(addScript('scripts/collections/' + className + '.js'))
+        .pipe(addScript('scripts/routes/' + className + '.js'))
+        .pipe(gulp.dest('./app'));
+
+    process.on('exit', function () {
+        done();
+    });
+});

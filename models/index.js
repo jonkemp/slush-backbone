@@ -5,7 +5,7 @@
 (function () {
     'use strict';
 
-    <%= classifyAppName %>.Models.<%= classifyModelName %> = Backbone.Model.extend({
+    <%= classifyAppName %>.Models.<%= classifyClassName %> = Backbone.Model.extend({
 
         url: '',
 

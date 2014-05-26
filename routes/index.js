@@ -5,7 +5,7 @@
 (function () {
     'use strict';
 
-    <%= classifyAppName %>.Routers.<%= classifyRouterName %> = Backbone.Router.extend({
+    <%= classifyAppName %>.Routers.<%= classifyClassName %> = Backbone.Router.extend({
 
     });
 

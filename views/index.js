@@ -5,7 +5,7 @@
 (function () {
     'use strict';
 
-    <%= classifyAppName %>.Views.<%= classifyViewName %> = Backbone.View.extend({
+    <%= classifyAppName %>.Views.<%= classifyClassName %> = Backbone.View.extend({
 
         template: '',
 
