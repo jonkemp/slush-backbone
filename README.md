@@ -1,6 +1,6 @@
 # [slush](https://github.com/slushjs/slush)-backbone [![Build Status](https://secure.travis-ci.org/jonkemp/slush-backbone.png?branch=master)](https://travis-ci.org/jonkemp/slush-backbone)
 
-> WIP - Slush generator for Backbone.js web apps
+> Slush generator for Backbone.js web apps
 
 For more information on what this generator can do for you, take a look at the [gulp plugins](https://github.com/jonkemp/slush-backbone/blob/master/templates/package.json) used in the `package.json`. Please see the [gulpfile.js](https://github.com/jonkemp/slush-backbone/blob/master/templates/gulpfile.js) for up to date information on what is supported.
 
