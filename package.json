@@ -26,7 +26,7 @@
     "npm": ">=1.4.3"
   },
   "scripts": {
-    "test": "echo \"No tests\""
+    "test": "mocha"
   },
   "dependencies": {
     "gulp": "^3.6.2",
@@ -39,6 +39,10 @@
     "through2": "^0.4.2",
     "underscore.string": "^2.3.3",
     "wiredep": "^1.4.4"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*"
   },
   "keywords": [
     "slushgenerator",
