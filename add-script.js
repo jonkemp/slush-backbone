@@ -10,6 +10,7 @@ module.exports = function (filepath) {
             return cb();
         }
 
+        var linefeed = /\r\n/g.test(file.contents) ? '\r\n' : '\n';
         var endbuild = '<!-- endbuild -->';
         var scriptTags = [];
         var source = file.contents.toString();
@@ -25,13 +26,13 @@ module.exports = function (filepath) {
         var re = new RegExp(scriptTags.map(function (line) {
             return '\s*' + line.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
         })
-        .join('\n'));
+        .join(linefeed));
 
         if (re.test(source)) {
             return source;
         }
 
-        var lines = source.split('\n');
+        var lines = source.split(linefeed);
 
         var otherwiseLineIndex = 0;
         lines.forEach(function (line, i) {
@@ -52,9 +53,9 @@ module.exports = function (filepath) {
 
         lines.splice(otherwiseLineIndex, 0, scriptTags.map(function (line) {
             return spaceStr + line;
-        }).join('\n'));
+        }).join(linefeed));
 
-        file.contents = new Buffer(lines.join('\n'));
+        file.contents = new Buffer(lines.join(linefeed));
 
         this.push(file);
 
