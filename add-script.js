@@ -11,11 +11,18 @@ module.exports = function (filepath) {
         }
 
         var endbuild = '<!-- endbuild -->';
-        var scriptTag = ['<script src="' + filepath + '"></script>'];
+        var scriptTags = [];
         var source = file.contents.toString();
+        if (Array.isArray(filepath)) {
+            filepath.forEach(function (asset) {
+                scriptTags.push('<script src="' + asset + '"></script>');
+            });
+        } else if (typeof filepath === 'string') {
+            scriptTags.push('<script src="' + filepath + '"></script>');
+        }
 
         // check if scriptTag is already in the body text
-        var re = new RegExp(scriptTag.map(function (line) {
+        var re = new RegExp(scriptTags.map(function (line) {
             return '\s*' + line.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
         })
         .join('\n'));
@@ -43,7 +50,7 @@ module.exports = function (filepath) {
             spaceStr += ' ';
         }
 
-        lines.splice(otherwiseLineIndex, 0, scriptTag.map(function (line) {
+        lines.splice(otherwiseLineIndex, 0, scriptTags.map(function (line) {
             return spaceStr + line;
         }).join('\n'));
 

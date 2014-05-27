@@ -255,10 +255,12 @@ gulp.task('all', function (done) {
     });
 
     gulp.src('./app/index.html')
-        .pipe(addScript('scripts/models/' + className + '.js'))
-        .pipe(addScript('scripts/views/' + className + '.js'))
-        .pipe(addScript('scripts/collections/' + className + '.js'))
-        .pipe(addScript('scripts/routes/' + className + '.js'))
+        .pipe(addScript([
+            'scripts/models/' + className + '.js',
+            'scripts/views/' + className + '.js',
+            'scripts/collections/' + className + '.js',
+            'scripts/routes/' + className + '.js'
+        ]))
         .pipe(gulp.dest('./app'));
 
     process.on('exit', function () {
