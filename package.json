@@ -35,8 +35,8 @@
     "gulp-rename": "^1.2.0",
     "gulp-template": "^0.1.1",
     "gulp-util": "^2.2.14",
-    "inquirer": "^0.4.1",
-    "through2": "^0.4.2",
+    "inquirer": "^0.5.1",
+    "through2": "^0.5.1",
     "underscore.string": "^2.3.3",
     "wiredep": "^1.4.4"
   },
