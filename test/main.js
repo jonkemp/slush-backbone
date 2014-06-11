@@ -5,8 +5,7 @@
 var should = require('should'),
     inquirer = require('inquirer'),
     gulp = require('gulp'),
-    mockGulpDest = require('mock-gulp-dest')(gulp),
-    path = require('path');
+    mockGulpDest = require('mock-gulp-dest')(gulp);
 
 require('../slushfile');
 
@@ -36,19 +35,7 @@ describe('slush-webapp', function() {
     describe('default generator', function () {
         beforeEach(function () {
             mockPrompt({
-                features: [{
-                    name: 'Sass',
-                    value: 'includeSass',
-                    checked: false
-                }, {
-                    name: 'Bootstrap',
-                    value: 'includeBootstrap',
-                    checked: false
-                }, {
-                    name: 'Modernizr',
-                    value: 'includeModernizr',
-                    checked: false
-                }],
+                features: [],
                 moveon: true
             });
         });
@@ -72,9 +59,37 @@ describe('slush-webapp', function() {
                     'package.json',
                     'bower.json',
                     'gulpfile.js',
-                    'app/index.html'
+                    'app/404.html',
+                    'app/favicon.ico',
+                    'app/robots.txt',
+                    'app/index.html',
+                    'app/scripts/main.js'
                 ]);
 
+                done();
+            });
+        });
+    });
+
+    describe('default generator: sass feature', function () {
+        it('should create css file', function (done) {
+            mockPrompt({
+                features: [],
+                moveon: true
+            });
+            gulp.start('default').once('stop', function () {
+                mockGulpDest.assertDestContains('app/styles/main.css');
+                done();
+            });
+        });
+
+        it('should create scss file', function (done) {
+            mockPrompt({
+                features: ['includeSass'],
+                moveon: true
+            });
+            gulp.start('default').once('stop', function () {
+                mockGulpDest.assertDestContains('app/styles/main.scss');
                 done();
             });
         });
