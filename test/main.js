@@ -79,6 +79,7 @@ describe('slush-webapp', function() {
             });
             gulp.start('default').once('stop', function () {
                 mockGulpDest.assertDestContains('app/styles/main.css');
+                mockGulpDest.assertDestNotContains('app/styles/main.scss');
                 done();
             });
         });
@@ -89,6 +90,7 @@ describe('slush-webapp', function() {
                 moveon: true
             });
             gulp.start('default').once('stop', function () {
+                mockGulpDest.assertDestNotContains('app/styles/main.css');
                 mockGulpDest.assertDestContains('app/styles/main.scss');
                 done();
             });
