@@ -71,7 +71,7 @@ gulp.task('connect', function () {
 
     require('http').createServer(app)
         .listen(config.port)
-        .on('listening', function() {
+        .on('listening', function () {
             console.log('Started connect web server on http://localhost:' + config.port + '.');
         });
 });
