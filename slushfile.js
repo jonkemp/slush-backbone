@@ -133,7 +133,7 @@ gulp.task('default', function (done) {
 
 gulp.task('model', function (done) {
     var appData = {};
-    var modelName = gulp.args[0] || 'application';
+    var modelName = gulp.args ? gulp.args[0] : 'application';
 
     appData.appname = getAppName();
     appData.appNameSlug = _s.slugify(appData.appname);
@@ -144,20 +144,19 @@ gulp.task('model', function (done) {
         .pipe(template(appData))
         .pipe(rename('/models/' + modelName + '.js'))
         .pipe(conflict('./'))
-        .pipe(gulp.dest('./app/scripts'));
+        .pipe(gulp.dest('./app/scripts'))
+        .on('finish', function () {
+            done();
+        });
 
     gulp.src('./app/index.html')
         .pipe(addScript('scripts/models/' + modelName + '.js'))
         .pipe(gulp.dest('./app'));
-
-    process.on('exit', function () {
-        done();
-    });
 });
 
 gulp.task('view', function (done) {
     var appData = {};
-    var viewName = gulp.args[0] || 'application';
+    var viewName = gulp.args ? gulp.args[0] : 'application';
 
     appData.appname = getAppName();
     appData.appNameSlug = _s.slugify(appData.appname);
@@ -168,20 +167,19 @@ gulp.task('view', function (done) {
         .pipe(template(appData))
         .pipe(rename('/views/' + viewName + '.js'))
         .pipe(conflict('./'))
-        .pipe(gulp.dest('./app/scripts'));
+        .pipe(gulp.dest('./app/scripts'))
+        .on('finish', function () {
+            done();
+        });
 
     gulp.src('./app/index.html')
         .pipe(addScript('scripts/views/' + viewName + '.js'))
         .pipe(gulp.dest('./app'));
-
-    process.on('exit', function () {
-        done();
-    });
 });
 
 gulp.task('collection', function (done) {
     var appData = {};
-    var collectionName = gulp.args[0] || 'application';
+    var collectionName = gulp.args ? gulp.args[0] : 'application';
 
     appData.appname = getAppName();
     appData.appNameSlug = _s.slugify(appData.appname);
@@ -192,20 +190,19 @@ gulp.task('collection', function (done) {
         .pipe(template(appData))
         .pipe(rename('/collections/' + collectionName + '.js'))
         .pipe(conflict('./'))
-        .pipe(gulp.dest('./app/scripts'));
+        .pipe(gulp.dest('./app/scripts'))
+        .on('finish', function () {
+            done();
+        });
 
     gulp.src('./app/index.html')
         .pipe(addScript('scripts/collections/' + collectionName + '.js'))
         .pipe(gulp.dest('./app'));
-
-    process.on('exit', function () {
-        done();
-    });
 });
 
 gulp.task('router', function (done) {
     var appData = {};
-    var routerName = gulp.args[0] || 'application';
+    var routerName = gulp.args ? gulp.args[0] : 'application';
 
     appData.appname = getAppName();
     appData.appNameSlug = _s.slugify(appData.appname);
@@ -216,15 +213,14 @@ gulp.task('router', function (done) {
         .pipe(template(appData))
         .pipe(rename('/routes/' + routerName + '.js'))
         .pipe(conflict('./'))
-        .pipe(gulp.dest('./app/scripts'));
+        .pipe(gulp.dest('./app/scripts'))
+        .on('finish', function () {
+            done();
+        });
 
     gulp.src('./app/index.html')
         .pipe(addScript('scripts/routes/' + routerName + '.js'))
         .pipe(gulp.dest('./app'));
-
-    process.on('exit', function () {
-        done();
-    });
 });
 
 gulp.task('all', function (done) {
