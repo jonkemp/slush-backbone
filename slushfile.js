@@ -239,45 +239,38 @@ gulp.task('router', ['router-add-script'], function (done) {
         });
 });
 
-gulp.task('all', function (done) {
+gulp.task('all-add-script', function () {
+    var className = 'application';
+
+    gulp.src('./app/index.html')
+        .pipe(addScript([
+                'scripts/models/' + className + '.js',
+                'scripts/views/' + className + '.js',
+                'scripts/collections/' + className + '.js',
+                'scripts/routes/' + className + '.js'
+        ]))
+        .pipe(gulp.dest('./app'));
+});
+
+gulp.task('all', ['all-add-script'], function (done) {
     var appData = {};
     var className = 'application';
+    var gulpif = require('gulp-if');
 
     appData.appname = getAppName();
     appData.appNameSlug = _s.slugify(appData.appname);
     appData.classifyAppName = _s.classify(appData.appname);
     appData.classifyClassName = _s.classify(className);
 
-    var stream1 = gulp.src(__dirname + '/models/index.js')
-        .pipe(rename('/models/' + className + '.js'));
-
-    var stream2 = gulp.src(__dirname + '/views/index.js')
-        .pipe(rename('/views/' + className + '.js'));
-
-    var stream3 = gulp.src(__dirname + '/collections/index.js')
-        .pipe(rename('/collections/' + className + '.js'));
-
-    var stream4 = gulp.src(__dirname + '/routes/index.js')
-        .pipe(rename('/routes/' + className + '.js'));
-
-    var streams = [stream1, stream2, stream3, stream4];
-
-    streams.forEach(function (stream) {
-        stream.pipe(template(appData))
-            .pipe(conflict('./'))
-            .pipe(gulp.dest('./app/scripts'));
-    });
-
-    gulp.src('./app/index.html')
-        .pipe(addScript([
-            'scripts/models/' + className + '.js',
-            'scripts/views/' + className + '.js',
-            'scripts/collections/' + className + '.js',
-            'scripts/routes/' + className + '.js'
-        ]))
-        .pipe(gulp.dest('./app'));
-
-    process.on('exit', function () {
-        done();
-    });
+    gulp.src([__dirname + '/models/*.js', __dirname + '/views/*.js', __dirname + '/collections/*.js', __dirname + '/routes/*.js'])
+        .pipe(gulpif('**/models/*.js', rename('/models/' + className + '.js')))
+        .pipe(gulpif('**/views/*.js', rename('/views/' + className + '.js')))
+        .pipe(gulpif('**/collections/*.js', rename('/collections/' + className + '.js')))
+        .pipe(gulpif('**/routes/*.js', rename('/routes/' + className + '.js')))
+        .pipe(template(appData))
+        .pipe(conflict('./'))
+        .pipe(gulp.dest('./app/scripts'))
+        .on('finish', function () {
+            done();
+        });
 });

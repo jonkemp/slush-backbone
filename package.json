@@ -31,6 +31,7 @@
   "dependencies": {
     "gulp": "^3.8.0",
     "gulp-conflict": "^0.1.1",
+    "gulp-if": "^1.2.1",
     "gulp-install": "^0.1.4",
     "gulp-rename": "^1.2.0",
     "gulp-template": "^0.1.1",
