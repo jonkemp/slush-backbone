@@ -99,10 +99,6 @@ describe('slush-webapp', function() {
 
     describe('model generator', function () {
         it('should create backbone model', function (done) {
-            mockPrompt({
-                features: [],
-                moveon: true
-            });
             gulp.start('model').once('stop', function () {
                 mockGulpDest.assertDestContains('models/application.js');
                 done();
@@ -112,10 +108,6 @@ describe('slush-webapp', function() {
 
     describe('view generator', function () {
         it('should create backbone view', function (done) {
-            mockPrompt({
-                features: [],
-                moveon: true
-            });
             gulp.start('view').once('stop', function () {
                 mockGulpDest.assertDestContains('views/application.js');
                 done();
@@ -125,10 +117,6 @@ describe('slush-webapp', function() {
 
     describe('collection generator', function () {
         it('should create backbone collection', function (done) {
-            mockPrompt({
-                features: [],
-                moveon: true
-            });
             gulp.start('collection').once('stop', function () {
                 mockGulpDest.assertDestContains('collections/application.js');
                 done();
@@ -138,10 +126,6 @@ describe('slush-webapp', function() {
 
     describe('router generator', function () {
         it('should create backbone router', function (done) {
-            mockPrompt({
-                features: [],
-                moveon: true
-            });
             gulp.start('router').once('stop', function () {
                 mockGulpDest.assertDestContains('routes/application.js');
                 done();
