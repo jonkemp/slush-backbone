@@ -132,4 +132,16 @@ describe('slush-webapp', function() {
             });
         });
     });
+
+    describe('all generator', function () {
+        it('should create backbone model, view, collection and router', function (done) {
+            gulp.start('all').once('stop', function () {
+                mockGulpDest.assertDestContains('models/application.js');
+                mockGulpDest.assertDestContains('views/application.js');
+                mockGulpDest.assertDestContains('collections/application.js');
+                mockGulpDest.assertDestContains('routes/application.js');
+                done();
+            });
+        });
+    });
 });
