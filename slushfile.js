@@ -131,7 +131,15 @@ gulp.task('default', function (done) {
     });
 });
 
-gulp.task('model', function (done) {
+gulp.task('model-add-script', function () {
+    var modelName = gulp.args ? gulp.args[0] : 'application';
+
+    gulp.src('./app/index.html')
+        .pipe(addScript('scripts/models/' + modelName + '.js'))
+        .pipe(gulp.dest('./app'));
+});
+
+gulp.task('model', ['model-add-script'], function (done) {
     var appData = {};
     var modelName = gulp.args ? gulp.args[0] : 'application';
 
@@ -148,13 +156,17 @@ gulp.task('model', function (done) {
         .on('finish', function () {
             done();
         });
+});
+
+gulp.task('view-add-script', function () {
+    var viewName = gulp.args ? gulp.args[0] : 'application';
 
     gulp.src('./app/index.html')
-        .pipe(addScript('scripts/models/' + modelName + '.js'))
+        .pipe(addScript('scripts/views/' + viewName + '.js'))
         .pipe(gulp.dest('./app'));
 });
 
-gulp.task('view', function (done) {
+gulp.task('view', ['view-add-script'], function (done) {
     var appData = {};
     var viewName = gulp.args ? gulp.args[0] : 'application';
 
@@ -171,13 +183,17 @@ gulp.task('view', function (done) {
         .on('finish', function () {
             done();
         });
+});
+
+gulp.task('collection-add-script', function () {
+    var collectionName = gulp.args ? gulp.args[0] : 'application';
 
     gulp.src('./app/index.html')
-        .pipe(addScript('scripts/views/' + viewName + '.js'))
+        .pipe(addScript('scripts/collections/' + collectionName + '.js'))
         .pipe(gulp.dest('./app'));
 });
 
-gulp.task('collection', function (done) {
+gulp.task('collection', ['collection-add-script'], function (done) {
     var appData = {};
     var collectionName = gulp.args ? gulp.args[0] : 'application';
 
@@ -194,13 +210,17 @@ gulp.task('collection', function (done) {
         .on('finish', function () {
             done();
         });
+});
+
+gulp.task('router-add-script', function () {
+    var routerName = gulp.args ? gulp.args[0] : 'application';
 
     gulp.src('./app/index.html')
-        .pipe(addScript('scripts/collections/' + collectionName + '.js'))
+        .pipe(addScript('scripts/routes/' + routerName + '.js'))
         .pipe(gulp.dest('./app'));
 });
 
-gulp.task('router', function (done) {
+gulp.task('router', ['router-add-script'], function (done) {
     var appData = {};
     var routerName = gulp.args ? gulp.args[0] : 'application';
 
@@ -217,10 +237,6 @@ gulp.task('router', function (done) {
         .on('finish', function () {
             done();
         });
-
-    gulp.src('./app/index.html')
-        .pipe(addScript('scripts/routes/' + routerName + '.js'))
-        .pipe(gulp.dest('./app'));
 });
 
 gulp.task('all', function (done) {
