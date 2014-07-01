@@ -2,6 +2,23 @@
 
 > Slush generator for Backbone.js web apps
 
+## Features
+
+### Includes:
+* HTML5 Boilerplate
+* jQuery
+* Modernizr
+* Bootstrap
+* Backbone.js
+* Underscore.js
+
+### What you can do:
+* Watch and compile Sass files automatically
+* Automatically wire-up dependencies installed with Bower
+* Start a server to preview your code with LiveReload
+* Automatically lint your scripts
+* Concatenate and minify CSS and JavaScript files
+
 For more information on what this generator can do for you, take a look at the [gulp plugins](https://github.com/jonkemp/slush-backbone/blob/master/templates/package.json) used in the `package.json`. Please see the [gulpfile.js](https://github.com/jonkemp/slush-backbone/blob/master/templates/gulpfile.js) for up to date information on what is supported.
 
 ## Getting Started
@@ -32,6 +49,12 @@ Run the generator from within the new folder:
 
 ```bash
 $ cd my-slush-backbone && slush backbone
+```
+
+Scaffold out a Backbone model called 'todo':
+
+```bash
+$ slush backbone:model todo
 ```
 
 ## Generator tasks
