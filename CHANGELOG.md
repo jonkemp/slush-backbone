@@ -1,5 +1,11 @@
 # slush-backbone changelog
 
+# 1.0.0
+
+- Remove underscore from bower dependencies.
+- New gulpfile.js.
+- Update dependencies.
+
 # 0.4.0
 
 - Refactor tasks in slushfile.js.
