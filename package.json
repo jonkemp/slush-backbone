@@ -36,10 +36,10 @@
     "gulp-rename": "^1.2.0",
     "gulp-template": "^1.0.0",
     "gulp-util": "^3.0.0",
-    "inquirer": "^0.6.0",
+    "inquirer": "^0.8.0",
     "through2": "^0.6.1",
     "underscore.string": "^2.3.3",
-    "wiredep": "^1.8.2"
+    "wiredep": "^2.0.0"
   },
   "devDependencies": {
     "mocha": "*",
