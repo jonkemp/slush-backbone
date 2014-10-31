@@ -1,7 +1,7 @@
 {
   "name": "slush-backbone",
   "description": "Slush generator for Backbone.js web apps",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "https://github.com/jonkemp/slush-backbone",
   "author": {
     "name": "Jonathan Kemp",
